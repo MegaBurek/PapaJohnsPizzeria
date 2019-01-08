@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TitleScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/main_background">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150px"
+            android:layout_marginBottom="50px"
+            android:fontFamily="@font/title"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="15px"
+            android:text="Papa John's Pizzeria"
+            android:textColor="@android:color/black"
+            android:textSize="50sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/enter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150px"
+            android:fontFamily="@font/title"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="15sp"
+            android:text="Enter"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
