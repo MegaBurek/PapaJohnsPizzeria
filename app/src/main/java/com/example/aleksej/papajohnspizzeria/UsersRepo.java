@@ -26,16 +26,9 @@ public class UsersRepo{
 
     public void addUser(String name, String surname, String username, String password, int reserves){
         SQLiteDatabase db = database.getWritableDatabase();
-        ContentValues cv = new ContentValues();
 
-        cv.put(User.FIELD_NAME, name);
-        cv.put(User.FIELD_SURNAME, surname);
-        cv.put(User.FIELD_USERNAME, username);
-        cv.put(User.FIELD_PASSWORD, password);
-        cv.put(User.FIELD_RESERVE, reserves);
-        System.out.println(cv);
-
-        db.insert(User.TABLE_NAME, null, cv);
+        String query = String.format("INSERT INTO users(name,surname,username,password, reserves) VALUES(%s,%s,%s,%s,%s);",name,surname,username,password,reserves);
+        db.execSQL(query);
     }
 
     public static boolean checkLogIn(String username, String password){
