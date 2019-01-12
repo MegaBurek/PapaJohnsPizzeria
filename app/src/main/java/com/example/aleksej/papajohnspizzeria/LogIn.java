@@ -28,23 +28,21 @@ public class LogIn extends AppCompatActivity {
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
 
+        System.out.println(username.getText());
+
         signin = (Button)findViewById(R.id.signIn);
         register = (Button)findViewById(R.id.register);
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    if(Utils.checkLogIn(username.getText().toString(),password.getText().toString())){
-                        loggedIn = true;
-                        Intent mainMenu = new Intent(LogIn.this, MainMenu.class);
-                        LogIn.this.startActivity(mainMenu);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"Incorrect Username or Password",Toast.LENGTH_SHORT).show();
-                    }
-                } catch (ParseException e) {
-                    System.out.println(e);
+                if(UsersRepo.checkLogIn(username.getText().toString(),password.getText().toString())){
+                    loggedIn = true;
+                    Intent mainMenu = new Intent(LogIn.this, MainMenu.class);
+                    LogIn.this.startActivity(mainMenu);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Incorrect Username or Password",Toast.LENGTH_SHORT).show();
                 }
             }
         });

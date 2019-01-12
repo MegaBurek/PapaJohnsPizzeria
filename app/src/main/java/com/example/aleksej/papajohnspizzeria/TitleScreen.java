@@ -41,8 +41,8 @@ public class TitleScreen extends AppCompatActivity {
 
     private void fillUsers(){
         UsersRepo repo = new UsersRepo(db);
-        repo.addUser("Mark","Jones","Mark","Jones");
-        repo.addUser("Sam","White","Sam","White");
+        repo.addUser("Mark","Jones","Mark","Jones",3);
+        repo.addUser("Sam","White","Sam","White",11);
     }
 
 //    private void fillReservations(){

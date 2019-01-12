@@ -15,11 +15,11 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL1 = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER, %s TEXT, %s TEXT, %s TEXT);",
+        String SQL1 = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s INTEGER, %s TEXT, %s TEXT, %s TEXT);",
                 Reservation.TABLE_NAME, Reservation.FIELD_RES_ID, Reservation.FIELD_TABLE_No, Reservation.FIELD_NAME, Reservation.FIELD_DATE, Reservation.FIELD_TIME);
 
-        String SQL2 = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER, %s TEXT, %s TEXT, %s TEXT);",
-                User.TABLE_NAME, User.FIELD_NAME, User.FIELD_SURNAME, User.FIELD_USERNAME, User.FIELD_PASSWORD, User.FIELD_RESERVE);
+        String SQL2 = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s INTEGER);",
+                User.TABLE_NAME, User.FIELD_USER_ID, User.FIELD_NAME, User.FIELD_SURNAME, User.FIELD_USERNAME, User.FIELD_PASSWORD, User.FIELD_RESERVE);
 
         db.execSQL(SQL1);
         db.execSQL(SQL2);

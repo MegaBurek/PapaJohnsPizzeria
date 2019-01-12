@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Reservation{
 
-    public static final String TABLE_NAME="Users";
+    public static final String TABLE_NAME="reservations";
     public static final String FIELD_RES_ID="res_id";
     public static final String FIELD_TABLE_No="tableNo";
     public static final String FIELD_NAME="name";

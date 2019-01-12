@@ -24,7 +24,7 @@ public class UsersRepo{
     }
 
 
-    public void addUser(String name, String surname, String username, String password){
+    public void addUser(String name, String surname, String username, String password, int reserves){
         SQLiteDatabase db = database.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -32,8 +32,22 @@ public class UsersRepo{
         cv.put(User.FIELD_SURNAME, surname);
         cv.put(User.FIELD_USERNAME, username);
         cv.put(User.FIELD_PASSWORD, password);
+        cv.put(User.FIELD_RESERVE, reserves);
+        System.out.println(cv);
 
         db.insert(User.TABLE_NAME, null, cv);
+    }
+
+    public static boolean checkLogIn(String username, String password){
+        SQLiteDatabase db = database.getReadableDatabase();
+        String query = String.format("SELECT username,password FROM %s WHERE username = %s AND password = %s", User.TABLE_NAME, username, password);
+        Cursor result = db.rawQuery(query, new String[]{});
+        System.out.println(result.moveToFirst());
+        if(result.moveToFirst()) {
+            return true;
+        } else{
+            return false;
+        }
     }
 
 //    public void getUserById(int resId){
@@ -61,10 +75,14 @@ public class UsersRepo{
         result.moveToFirst();
         List<User> list = new ArrayList<User>(result.getCount());
         while(!result.isAfterLast()){ //dok nismo izasli posle poslednjeg
+            int userID = result.getInt(result.getColumnIndex(User.FIELD_USER_ID));
             String name = result.getString(result.getColumnIndex(User.FIELD_NAME));
             String surname = result.getString(result.getColumnIndex(User.FIELD_SURNAME));
             String username = result.getString(result.getColumnIndex(User.FIELD_USERNAME));
             String password = result.getString(result.getColumnIndex(User.FIELD_PASSWORD));
+            int reserves = result.getInt(result.getColumnIndex(User.FIELD_RESERVE));
+
+            list.add(new User(userID,name,surname,username,password,reserves));
 
             result.moveToNext();
         }
