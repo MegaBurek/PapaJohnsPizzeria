@@ -4,21 +4,11 @@ import java.util.Date;
 
 public class Reservation{
 
-    public static final String TABLE_NAME="reservations";
-    public static final String FIELD_RES_ID="res_id";
-    public static final String FIELD_TABLE_No="tableNo";
-    public static final String FIELD_NAME="name";
-    public static final String FIELD_DATE="date";
-    public static final String FIELD_TIME="time";
-
-
     private int resID;
     private int tableNo;
-    private String name;
-    private Date date;
-    private Date time;
+    private String name, date, time;
 
-    public Reservation(int resID, int tableNo,String name, Date date, Date time) {
+    public Reservation(int resID, int tableNo,String name, String date, String time) {
         this.resID = resID;
         this.tableNo = tableNo;
         this.name = name;
@@ -50,19 +40,19 @@ public class Reservation{
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

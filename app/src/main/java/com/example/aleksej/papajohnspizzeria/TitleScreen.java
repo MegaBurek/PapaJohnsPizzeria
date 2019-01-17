@@ -9,14 +9,12 @@ import android.widget.TextView;
 public class TitleScreen extends AppCompatActivity {
 
     TextView Enter;
-    Database db = new Database(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.title_screen);
 
-        fillDB();
         initComponents();
     }
 
@@ -32,23 +30,6 @@ public class TitleScreen extends AppCompatActivity {
             }
         });
     }
-
-
-    private void fillDB(){
-        fillUsers();
-//        fillReservations();
-    }
-
-    private void fillUsers(){
-        UsersRepo repo = new UsersRepo(db);
-        repo.addUser("Mark","Jones","Mark","Jones",3);
-        repo.addUser("Sam","White","Sam","White",11);
-    }
-
-//    private void fillReservations(){
-//        ReservationsRepo repo = new ReservationsRepo(db);
-//        repo.addReservation(4,"Mark Jones","2018.05.15 , Wed","12:30");
-//    }
 
 
 }

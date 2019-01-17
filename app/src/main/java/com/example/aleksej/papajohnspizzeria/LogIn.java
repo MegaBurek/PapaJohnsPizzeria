@@ -14,7 +14,6 @@ public class LogIn extends AppCompatActivity {
 
     EditText username, password;
     Button signin, register;
-    public static boolean loggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +35,7 @@ public class LogIn extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(UsersRepo.checkLogIn(username.getText().toString(),password.getText().toString())){
-                    loggedIn = true;
+                if(!UserAPI.checkLogIn(username.getText().toString(),password.getText().toString())){
                     Intent mainMenu = new Intent(LogIn.this, MainMenu.class);
                     LogIn.this.startActivity(mainMenu);
                 }
