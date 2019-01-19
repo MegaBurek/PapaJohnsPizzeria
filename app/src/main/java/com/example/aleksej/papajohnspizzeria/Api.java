@@ -110,6 +110,7 @@ public class Api {
                     con.disconnect();
 
                 } catch (Exception e){
+                    System.out.println(e);
                     response = "[]";
                 }
                 return response;

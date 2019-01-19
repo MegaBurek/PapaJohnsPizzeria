@@ -70,7 +70,6 @@ public class ReserveTable extends AppCompatActivity {
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println(t.getTableNo());
                     singleTable.putExtra("tableNo", t.getTableNo());
                     startActivity(singleTable);
 

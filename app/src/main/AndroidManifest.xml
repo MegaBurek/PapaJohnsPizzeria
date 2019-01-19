@@ -24,6 +24,7 @@
         <activity android:name=".MainMenu"></activity>
         <activity android:name=".ReserveTable"></activity>
         <activity android:name=".SingleTableActivity"></activity>
+        <activity android:name=".EndReservation"></activity>
     </application>
 
 </manifest>

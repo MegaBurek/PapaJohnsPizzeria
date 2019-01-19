@@ -81,7 +81,7 @@ public class Table {
             }
 
             if(object.has("reserved")){
-                table.setSmokers(object.getString("reserved"));
+                table.setReserved(object.getBoolean("reserved"));
             }
 
         }catch(Exception e){
