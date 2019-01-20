@@ -17,10 +17,8 @@ public class UserAPI {
     public static boolean checkLogIn(String username, String password){
 
         ArrayList<User> users = getUsers();
-        System.out.println(username);
 
         for(User u : users){
-            System.out.println(u.getName());
             if(u.getUsername() == username && u.getPassword() == password){
                 return true;
             }

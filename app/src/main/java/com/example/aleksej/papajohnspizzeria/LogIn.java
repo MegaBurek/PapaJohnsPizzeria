@@ -27,7 +27,6 @@ public class LogIn extends AppCompatActivity {
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
 
-        System.out.println(username.getText());
 
         signin = (Button)findViewById(R.id.signIn);
         register = (Button)findViewById(R.id.register);

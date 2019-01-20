@@ -2,9 +2,14 @@ package com.example.aleksej.papajohnspizzeria;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -72,15 +77,20 @@ public class Api {
             protected String doInBackground(String... strings) {
                 String response = "";
 
+                //treba nam http konekcija
                 try {
                     URL link = new URL(strings[0]);
                     HttpURLConnection con = (HttpURLConnection) link.openConnection();
 
+                    //Koristimo POST metodu
                     con.setRequestMethod("POST");
 
+                    //Postavljamo da koristimo http konekciju za input i za output
                     con.setDoInput (true);
                     con.setDoOutput (true);
 
+                    //Koristimo Uri.Builder za pravljenje upita, odnosno enkodiranje kljuca i vrednosti
+                    //u konacan string npr ?id=1 itd...
                     Uri.Builder builder = new Uri.Builder();
 
                     for (Element elem : data){
@@ -89,6 +99,7 @@ public class Api {
 
                     String postData = builder.build().getEncodedQuery();
 
+                    //Pisemo kreirani upit, odnosno saljemo podatke
                     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream(), "UTF-8"));
 
                     bw.write(postData);
@@ -100,17 +111,16 @@ public class Api {
                     con.connect();
 
                     BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
+                    //cita se red po red iz br
                     String red;
                     while ((red = br.readLine())!=null){
                         response += red + "\n";
                     }
 
                     br.close();
-                    con.disconnect();
+                    con.disconnect(); // ne mora se pisati - Android sam ubija konekciju
 
                 } catch (Exception e){
-                    System.out.println(e);
                     response = "[]";
                 }
                 return response;
