@@ -70,7 +70,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/something"
+                        android:id="@+id/gallery"
 
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
@@ -82,7 +82,7 @@
                         android:shadowDx="0"
                         android:shadowDy="0"
                         android:shadowRadius="5"
-                        android:text="Something"
+                        android:text="Gallery"
                         android:textColor="#FFFFFF"
                         android:textSize="30sp" />
 

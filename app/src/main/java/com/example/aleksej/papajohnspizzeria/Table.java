@@ -6,18 +6,16 @@ public class Table {
 
     private int tableNo,chairs;
     private String type,smokers;
-    private boolean reserved;
 
     public Table(){
 
     }
 
-    public Table(int tableNo, String type, String smokers, int chairs, boolean reserved){
+    public Table(int tableNo, String type, String smokers, int chairs){
         this.tableNo = tableNo;
         this.type = type;
         this.smokers = smokers;
         this.chairs = chairs;
-        this.reserved = reserved;
     }
 
     public int getTableNo() {
@@ -52,14 +50,6 @@ public class Table {
         this.smokers = shape;
     }
 
-    public boolean isReserved() {
-        return reserved;
-    }
-
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
-    }
-
     public static Table parseJSON(JSONObject object){
         Table table = new Table();
 
@@ -78,10 +68,6 @@ public class Table {
 
             if(object.has("smokers")){
                 table.setSmokers(object.getString("smokers"));
-            }
-
-            if(object.has("reserved")){
-                table.setReserved(object.getBoolean("reserved"));
             }
 
         }catch(Exception e){

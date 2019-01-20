@@ -25,6 +25,7 @@
         <activity android:name=".ReserveTable"></activity>
         <activity android:name=".SingleTableActivity"></activity>
         <activity android:name=".EndReservation"></activity>
+        <activity android:name=".Gallery"></activity>
     </application>
 
 </manifest>

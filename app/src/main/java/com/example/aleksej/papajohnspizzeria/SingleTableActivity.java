@@ -67,7 +67,7 @@ public class SingleTableActivity extends AppCompatActivity {
 
     @SuppressLint("HandlerLeak")
     public void initComponents(int id, final Intent endReservation){
-        Api.getJSON("http://192.168.0.10:5000/json/"+String.valueOf(id), new ReadDataHandler(){
+        Api.getJSON("http://192.168.0.10:5000/tables/"+String.valueOf(id), new ReadDataHandler(){
             @Override
             public void handleMessage(Message msg) {
                 String response = getJson();
@@ -113,10 +113,6 @@ public class SingleTableActivity extends AppCompatActivity {
                             break;
                     }
 
-                    if(table.isReserved()){
-                        reserveForm.setVisibility(View.GONE);
-                        reserved.setText("Table has been Reserved");
-                    }
 
                 } catch (Exception e) {
                     ((TextView)findViewById(R.id.smokers)).setText(response);
@@ -181,23 +177,59 @@ public class SingleTableActivity extends AppCompatActivity {
             @SuppressLint("HandlerLeak")
             @Override
             public void onClick(View v) {
-
-                sendNewReservation(table);
-
-                endReservation.putExtra("nameInfo",nameText.getText().toString());
-                endReservation.putExtra("dateInfo",dateText.getText().toString());
-                endReservation.putExtra("timeInfo",timeText.getText().toString());
-
-                startActivity(endReservation);
+                checkIfReserved(endReservation, table, dateText.getText().toString(), timeText.getText().toString());
             }
         });
     }
 
     private void updateLabelDate() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dateText.setText(sdf.format(myCalendar1.getTime()));
+    }
+
+    @SuppressLint("HandlerLeak")
+    private void checkIfReserved(final Intent endReservation,final Table table, final String dateToCompare, final String timeToCompare) {
+
+        int tableNo = table.getTableNo();
+        Api.getJSON("http://192.168.0.10:5000/reservations/"+String.valueOf(tableNo), new ReadDataHandler(){
+            @Override
+            public void handleMessage(Message msg) {
+                String response = getJson();
+                try {
+                    JSONObject object = new JSONObject(response);
+                    final Reservation reservation = Reservation.parseJSON(object);
+                    System.out.println("Returned Object: " + object);
+
+                    String date = reservation.getDate();
+                    String time = reservation.getTime();
+
+//                    String highTime = String.valueOf(Integer.valueOf(time)+1); //trying to check 1 hour before or after a reservation
+//                    String lowTime = String.valueOf(Integer.valueOf(time)-1);
+
+                    if(object.length() == 0){
+                        System.out.println(date +" "+ dateToCompare + " " + time +" "+ timeToCompare);
+                        if(!(date == dateToCompare && time == timeToCompare)){
+                            sendNewReservation(table);
+
+                            endReservation.putExtra("nameInfo",nameText.getText().toString());
+                            endReservation.putExtra("dateInfo",dateText.getText().toString());
+                            endReservation.putExtra("timeInfo",timeText.getText().toString());
+
+                            startActivity(endReservation);
+                        }
+                        else{
+                            reserveForm.setVisibility(View.GONE);
+                            reserved.setText("Table has been Reserved");
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error from checkIfReserved " + e);
+                }
+
+            }
+        });
     }
 
 
@@ -216,7 +248,7 @@ public class SingleTableActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 String odgovor = getJson();
-                System.out.println(odgovor);
+                System.out.println("Finished reservation: " + odgovor);
             }
         });
     }

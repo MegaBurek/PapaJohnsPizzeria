@@ -1,5 +1,7 @@
 package com.example.aleksej.papajohnspizzeria;
 
+import org.json.JSONObject;
+
 import java.util.Date;
 
 public class Reservation{
@@ -14,6 +16,10 @@ public class Reservation{
         this.name = name;
         this.date = date;
         this.time = time;
+    }
+
+    public Reservation(){
+
     }
 
     public int getResID() {
@@ -54,5 +60,36 @@ public class Reservation{
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public static Reservation parseJSON(JSONObject object){
+        Reservation reservation = new Reservation();
+
+        try{
+            if(object.has("resID")){
+                reservation.setResID(object.getInt("resID"));
+            }
+
+            if(object.has("tableNo")){
+                reservation.setTableNo(object.getInt("tableNo"));
+            }
+
+            if(object.has("name")){
+                reservation.setName(object.getString("name"));
+            }
+
+            if(object.has("date")){
+                reservation.setDate(object.getString("date"));
+            }
+
+            if(object.has("time")){
+                reservation.setTime(object.getString("time"));
+            }
+
+        }catch(Exception e){
+            System.out.println("Error from Reservation class: " + e);
+        }
+
+        return reservation;
     }
 }

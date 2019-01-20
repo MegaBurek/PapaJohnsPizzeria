@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainMenu extends AppCompatActivity {
 
-    Button logOut,reserve,something;
+    Button logOut,reserve,gallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,15 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent reservePage = new Intent(MainMenu.this, ReserveTable.class);
                 MainMenu.this.startActivity(reservePage);
+            }
+        });
+
+        gallery = (Button) findViewById(R.id.gallery);
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryPage = new Intent(MainMenu.this, Gallery.class);
+                MainMenu.this.startActivity(galleryPage);
             }
         });
 
